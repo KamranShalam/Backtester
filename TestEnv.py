@@ -1,19 +1,19 @@
 import datetime as dt
 import matplotlib.pyplot as plt
-import pandas_datareader as web
+import pandas_datareader as pdr
 
 #Eneter stock/curreny symbol here
 currency = "GBPUSD=X"
 #Enter Moving Averages here
 ma1, ma2 = 10, 100
-#Enter how far back youd like to test
-start = dt.datetime.now() - dt.timedelta(hours = (24 * 365)* 2)
+#Enter how far back you would like to test
+start = dt.datetime.now() - dt.timedelta(hours = (24 * 365))
 end = dt.datetime.now()
 
 plt.style.use("dark_background")
 plt.grid(color ="lightgrey", alpha = 0.2)
 
-data = web.DataReader(currency, 'yahoo', start, end)
+data = pdr.DataReader(currency, 'yahoo', start, end)
 data[f'SMA_{ma1}'] = data['Adj Close'].rolling(window=ma1).mean()
 data[f'SMA_{ma2}'] = data['Adj Close'].rolling(window=ma2).mean()
 
